@@ -19,10 +19,10 @@ import "./diagram.scss";
 
 
 /*
- * The EntityInheritanceDiagram renders a tree of entity types organised as a 
- * hierarchy by inheritance. The tree is clickable for selection of an entity 
+ * The EntityInheritanceDiagram renders a tree of entity types organised as a
+ * hierarchy by inheritance. The tree is clickable for selection of an entity
  * type and collapse/expand of a subtree.
- * 
+ *
  */
 
 export default function EntityInheritanceDiagram(props) {
@@ -49,7 +49,7 @@ export default function EntityInheritanceDiagram(props) {
   let scrolled = useRef(false);
 
   let treeDepth = useRef(0);
-  
+
 
   /*
    * This method clears any introductory text or previous rendering of the diagram, and resets control properties
@@ -432,7 +432,7 @@ export default function EntityInheritanceDiagram(props) {
       const thisTree = tree;
 
       const duration = event && event.altKey ? 2500 : 250;
-     
+
       /*
        * Compute the new tree layout.
        */
@@ -523,7 +523,7 @@ export default function EntityInheritanceDiagram(props) {
                .attr("x", 12)
                .attr("text-anchor", "start")
                .text(d => typesContext.isTypeDeprecated("Entity", d.data.name) ? "["+d.data.name+"]" : d.data.name )
-               .on("click", d => { typeSelected("Entity", d.currentTarget.textContent); })
+               .on("click", d => { typeSelected("Entity", d.data.name); })
                .clone(true)
                .lower()
                .attr("stroke-linejoin", "round")
@@ -655,7 +655,7 @@ export default function EntityInheritanceDiagram(props) {
          * Call update() on each of the trees.
          *
          * Data is unlikely to change unless server is changed - repeat the initial rendering...
-         */ 
+         */
         initialiseInheritanceDiagram();
 
         createInheritanceTrees();
@@ -684,7 +684,7 @@ export default function EntityInheritanceDiagram(props) {
     },
     [props.outerHeight, props.outerWidth]
   )
-  
+
 
   return (
     <div className="drawing-container" id="drawingContainer" ref={drgContainerDiv}>
